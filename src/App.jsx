@@ -1,26 +1,27 @@
-import { useState } from 'react'
+import './App.css';
+import MyNavbar from './components/Navbar';
+import { Routes, Route } from "react-router-dom";
 
-import './App.css'
-import { Button } from 'react-bootstrap'
+import Home from './pages/Home';
+import Search from './pages/Search';
+import PageTwo from './pages/PageTwo';
+import Contact from './pages/Contact';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <h1>P187</h1>
-        <p>
-          This is the start of my project!
-        </p>
+      <MyNavbar />
+
+      <div className="container mt-4">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Search" element={<Search />} />
+          <Route path="/page2" element={<PageTwo />} />
+          <Route path="/Contact" element={<Contact />} />
+        </Routes>
       </div>
-      <Button
-        onClick={() => setCount((count) => count + 1)}
-      >
-        Count is {count}
-      </Button>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
