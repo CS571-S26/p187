@@ -20,9 +20,9 @@ export default function MyNavbar() {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
-                        <Nav.Link as={Link} to="/Search">Search</Nav.Link>
-                        <Nav.Link as={Link} to="/page2">Page Two</Nav.Link>
-                        <Nav.Link as={Link} to="/Contact">Contact Us</Nav.Link>
+                        <Nav.Link as={Link} to="/search">Search</Nav.Link>
+                        <Nav.Link as={Link} to="/add">Add Apartment</Nav.Link>
+                        <Nav.Link as={Link} to="/contact">Contact Us</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

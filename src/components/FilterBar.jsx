@@ -16,11 +16,28 @@ export default function FilterBar({ filters, setFilters }) {
     });
   }
 
-  return (
-    <div className="bg-light p-3 mb-3 border rounded">
-      <Row className="align-items-center">
+  function handleBedroomChange(e) {
+    const value = parseInt(e.target.value);
 
-        {/* Checkbox filters */}
+    let updated = [...filters.bedrooms];
+
+    if (e.target.checked) {
+      updated.push(value);
+    } else {
+      updated = updated.filter((b) => b !== value);
+    }
+
+    setFilters({
+      ...filters,
+      bedrooms: updated
+    });
+  }
+
+  return (
+    <div className="bg-light p-3 mt-3 border rounded">
+      <Row className="align-items-start">
+
+        {/* Checkboxes */}
         <Col xs={12} md={4}>
           <Form.Check
             type="checkbox"
@@ -36,9 +53,16 @@ export default function FilterBar({ filters, setFilters }) {
             checked={filters.parking}
             onChange={handleCheckboxChange}
           />
+          <Form.Check
+            type="checkbox"
+            label="Utilities Included"
+            name="utilities"
+            checked={filters.utilities}
+            onChange={handleCheckboxChange}
+          />
         </Col>
 
-        {/* Price slider */}
+        {/* Price */}
         <Col xs={12} md={4}>
           <Form.Label>Max Price: ${filters.maxPrice}</Form.Label>
           <Form.Range
@@ -50,9 +74,20 @@ export default function FilterBar({ filters, setFilters }) {
           />
         </Col>
 
-        {/* Placeholder */}
+        {/* Bedrooms */}
         <Col xs={12} md={4}>
-          <p className="mb-0 text-muted">More filters coming soon...</p>
+          <Form.Label>Bedrooms</Form.Label>
+
+          {[1, 2, 3, 4, 5].map((num) => (
+            <Form.Check
+              key={num}
+              type="checkbox"
+              label={`${num} Bedroom`}
+              value={num}
+              checked={filters.bedrooms.includes(num)}
+              onChange={handleBedroomChange}
+            />
+          ))}
         </Col>
 
       </Row>
