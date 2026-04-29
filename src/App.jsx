@@ -2,6 +2,7 @@ import './App.css';
 import MyNavbar from './components/Navbar';
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import Home from './pages/Home';
 import Search from './pages/Search';
@@ -12,6 +13,8 @@ import initialApartments from './data/apartments';
 
 function App() {
 
+  const location = useLocation();
+const isHome = location.pathname === "/";
   const [apartments, setApartments] = useState(initialApartments);
 
   function addApartment(newApartment) {
@@ -22,7 +25,7 @@ function App() {
   }
 
   return (
-    <>
+    <div className={isHome ? "home-bg" : "side-image-bg"}>
       <MyNavbar />
 
       <div className="container mt-4">
@@ -33,7 +36,7 @@ function App() {
           <Route path="/Contact" element={<Contact />} />
         </Routes>
       </div>
-    </>
+    </div>
   );
 }
 
