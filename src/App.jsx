@@ -28,7 +28,7 @@ const isHome = location.pathname === "/";
     <div className={isHome ? "home-bg" : "side-image-bg"}>
       <MyNavbar />
 
-      <div className="container mt-4">
+      <div className="container-fluid mt-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Search" element={<Search apartments={apartments}/>} />
