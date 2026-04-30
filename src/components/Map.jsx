@@ -1,26 +1,25 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
+  iconRetinaUrl: markerIcon2x,
   iconUrl: markerIcon,
   shadowUrl: markerShadow,
 });
 
 export default function Map({ filters, apartments }) {
-
   const filteredApartments = apartments.filter((apt) => {
     if (filters) {
       if (apt.price > filters.maxPrice) return false;
       if (filters.pets && !apt.pets) return false;
       if (filters.parking && !apt.parking) return false;
       if (filters.utilities && !apt.utilities) return false;
-
-      // bedrooms filter
       if (filters.bedrooms.length > 0) {
         const match = filters.bedrooms.some((b) =>
           apt.bedrooms.includes(b)
@@ -40,10 +39,9 @@ export default function Map({ filters, apartments }) {
         style={{ height: "100%", width: "100%" }}
       >
         <TileLayer
-          attribution='© OpenStreetMap contributors'
+          attribution="© OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
         {filteredApartments.map((apt) => (
           <Marker key={apt.id} position={apt.position}>
             <Popup>
